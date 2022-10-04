@@ -1,0 +1,12 @@
+.idea/
+node_modules/
+.github/
+dist/
+*.iml
+*.iws
+*.eml
+out/
+.DS_Store
+log/*.log
+tmp/**
+.sass-cache
