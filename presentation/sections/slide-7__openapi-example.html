@@ -1,0 +1,39 @@
+<section class="flexed">
+  <h4><span class="primary-highlighted">Пример</span> спецификации</h4>
+  <div class="r-vstack r-stretch items-start">
+    <pre data-id="code-animation">
+      <code class="hljs stretch" data-trim data-line-numbers="|1-5|6-7|8-9|10-12|13-19|20-30">
+        openapi: 3.0.2
+        info:
+          description: Описание списка эндпоинтов
+          title: Заголовок
+          version: Версия
+        paths:
+          /someEntity/{entityUuid}:
+            parameters:
+                - $ref: "#/components/parameters/entityUuidParams"
+            put:
+              summary: Отредактировать сущность
+              operationId: editInstallation
+              requestBody:
+                description: Информация для обновления сущности
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/SomeEntityDto"
+              responses:
+                200:
+                  description: Сущность обновлена
+                  content:
+                    application/json:
+                      schema:
+                        $ref: "#/components/schemas/SomeEntityDto"
+                404:
+                  description: Сущность не найдена
+                500:
+                  description: Ошибка при редактировании сущности
+        </code>
+    </pre>
+  </div>
+</section>

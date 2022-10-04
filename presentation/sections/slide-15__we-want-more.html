@@ -1,0 +1,120 @@
+<section>
+  <h4>Всегда хочется <span class="primary-highlighted">больше</span></h4>
+  <div class="r-vstack r-stretch">
+    <img src="assets/more_generation_mem.jpeg" />
+
+    <aside class="notes">
+      Но всегда хочется больше. И я тоже об этом подумал. Мне понравилась фишка
+      писать меньше кода, я вообще люблю когда мою работу, пусть и частично,
+      делает кто-то другой, особенно если он ошибается меньше меня.
+
+      <br />
+      В какую сторону смотреть?
+    </aside>
+  </div>
+</section>
+
+<section style="height: 100%" data-auto-animate>
+  <h4>
+    Наши ручки устали от
+    <span class="primary-highlighted">мокового сервиса</span>
+  </h4>
+  <div class="r-vstack r-stretch">
+    <pre class="fragment" data-id="code-animation">
+        <code class="hljs stretch" data-trim data-line-numbers="|5,21|10|11-19|13-17">
+            /**
+             * Обёртка для расширения мокового класса Service
+             */
+            function ExtendEntities&lt;T extends new (...args: any[]) => any&gt;(Base: T) {
+              return class extends Base {
+                /**
+                 * Получение списка имен сущностей
+                 * @param {string} parentUuid идентификатор родителя сущностей
+                 */
+                public static getEntitiesNames(parentUuid: string): Promise&lt;string[]&gt; {
+                  return new Promise((resolve) => {
+                    setTimeout(() => {
+                      resolve(
+                        get50To50Chance()
+                          ? []
+                          : [ entities[2].name, entities[4].name ]
+                      );
+                    }, TIMEOUT);
+                  });
+                }
+            }
+        </code>
+    </pre>
+  </div>
+
+  <aside class="notes">
+    Ну и я решил посмотреть в сторону генерации моков. Мы пишем их руками,
+    подумал я, зачем. Оказалось, есть причина.
+
+    <br />
+
+    Вот базовый пример простого мока, который у нас сейчас есть. Вроде бы все
+    довольно легко, просто возвращается какое-то значение, отлично, в целом
+    выглядит так, как будто это можно заменить на генерацию.
+
+    <br />
+    Плюсом, была идея генерации не просто сервиса моков, а использование
+    mock-service-worker'a, тогда бы нам не пришлось бы подменять ничего и на
+    уровне редакс хранилища. Вроде все здорово, нужны моки - поднимаем сервис
+    воркер, который генерируется автоматически.
+
+    <br />
+    Но на самом деле еще до реализации стало понятно, что это не очень возможно.
+    Наш мок (слайд назад), который здесь довольно простой, это скорее
+    исключение. Чаще всего мы хотим чтобы наш мок не просто отдавал что-то, но и
+    что-то записывал в локальные переменные, где-то что-то изменял. В общем мы
+    хотим чтобы наш мок был интерактивным и реализация этой интерактивности
+    может быть разной.
+  </aside>
+</section>
+<section style="height: 100%" data-auto-animate>
+  <h4>
+    Наши ручки устали от
+    <span class="primary-highlighted">мокового сервиса</span>
+  </h4>
+  <div class="r-vstack r-stretch">
+    <a href="https://www.npmjs.com/package/msw-auto-mock">msw-auto-mock 🥳</a>
+    <pre data-id="code-animation">
+        <code class="hljs stretch" data-trim data-line-numbers="|4-6" >
+          import { setupWorker, rest } from 'msw'
+
+          const worker = setupWorker(
+            rest.get&lt;void, string[]&gt;('/entitiesNames', async (req, res, ctx) => {
+              // TODO: Реализация мока
+            }),
+          )
+
+          worker.start()
+        </code>
+    </pre>
+  </div>
+</section>
+<section style="height: 100%" data-auto-animate>
+  <h4>
+    Наши ручки устали от
+    <span class="primary-highlighted">мокового сервиса</span>
+  </h4>
+  <div class="r-vstack r-stretch">
+    <a href="https://www.npmjs.com/package/msw-auto-mock">msw-auto-mock 🥳</a>
+    <pre data-id="code-animation">
+        <code class="hljs stretch" data-trim data-line-numbers="4-8">
+          import { setupWorker, rest } from 'msw'
+
+          const worker = setupWorker(
+            rest.get&lt;void, string[]&gt;('/entitiesNames', async (req, res, ctx) => {
+              const filledMock = [entities[2].name, entities[4].name]
+
+              return res(ctx.json(get50To50Chance() ? [] : filledMock))
+            }),
+          )
+
+          worker.start()
+        </code>
+    </pre>
+  </div>
+</section>

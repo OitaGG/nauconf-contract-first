@@ -1,0 +1,266 @@
+<section>
+  <h4>
+    Спускаемся глубже -
+    <span style="color: var(--r-link-color)">удобная генерация данных</span>
+  </h4>
+  <ul class="default-list">
+    <li class="fragment">
+      Моки <strong>должны полностью</strong> генерироваться из спецификации
+    </li>
+    <li class="fragment">
+      Моки <strong>должны быть осмысленными</strong> - соответствовать описанию в
+      спецификации
+    </li>
+    <li class="fragment">
+      Моки <strong>должны быть удобными</strong> - мы можем использовать сгенерированные моки в
+      коллекциях или по одиночке
+    </li>
+  </ul>
+  <aside class="notes">
+    Звучит более реалистично. Сейчас мы описываем моки вручную - вообще не
+    круто.
+  </aside>
+</section>
+
+<section data-auto-animate>
+  <h4>
+    Генерация <span style="color: var(--r-link-color)">из генерации</span>...
+  </h4>
+  <div>
+    <div class="fragment" style="text-align: left">
+        Будем генерировать из DTO -
+        <a href="https://github.com/google/intermock">intermock 🤔</a>
+    </div>
+
+    <div class="fragment" style="display: grid; grid-template-columns: 1fr 1fr">
+      <pre data-id="code-animation">
+              <code class="hljs" data-trim data-line-numbers>
+                  interface Person {
+                    name: string;
+                    age: number;
+                  }
+              </code>
+      </pre>
+      <pre data-id="code-animation-2">
+              <code class="hljs" data-trim data-line-numbers>
+                {
+                  "Person": {
+                    "name": "Lorem ipsum",
+                    "age": 98
+                  }
+                };
+              </code>
+      </pre>
+    </div>
+  </div>
+  <aside class="notes">
+    Стоит начать с первого пункта - генерации из спецификации. На самом деле
+    конкретных пакетов для генерации моков из openapi спецификации я вообще не
+    нашел.
+
+    <br />
+    Самое прикольное, что мы можем с помощью такой вот аннотации вытащить из
+    фейкера нужный тип при генерации
+  </aside>
+</section>
+<section data-auto-animate>
+  <h4>
+    Генерация <span style="color: var(--r-link-color)">из генерации</span>...
+  </h4>
+  <div>
+    <div style="text-align: left">
+      Будем генерировать из DTO -
+      <a href="https://github.com/google/intermock">intermock 🤔</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; height: 100%">
+      <pre data-id="code-animation">
+              <code class="hljs" data-trim data-line-numbers>
+                  interface Person {
+                    /** @mockType {firstname} */
+                    name: string;
+                    age: number;
+                  }
+              </code>
+      </pre>
+      <pre data-id="code-animation-2">
+              <code class="hljs" data-trim data-line-numbers=>
+                {
+                  "Person": {
+                    "name": "Asa Mohr",
+                    "age": 98
+                  }
+                };
+              </code>
+      </pre>
+    </div>
+
+    <div class="fragment">
+      <p>Все чуточку более грустно 🫠</p>
+      <ul class="">
+        <li>Генерируются сразу данные - неудобно</li>
+        <li>Не работают пересечения типов/расширения интерфейсов</li>
+        <li>Не работают импорты</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">
+    Стоит начать с первого пункта - генерации из спецификации. На самом деле
+    конкретных пакетов для генерации моков из openapi спецификации я вообще не
+    нашел.
+
+    <br />
+    Самое прикольное, что мы можем с помощью такой вот аннотации вытащить из
+    фейкера нужный тип при генерации
+  </aside>
+</section>
+
+<section>
+  <h4>
+    Добавляем <span style="color: var(--r-link-color)">кастомные свойства</span>
+  </h4>
+  <div class="r-vstack r-stretch">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; width: 100%">
+       <pre data-id="code-animation">
+              <code class="hljs stretch" data-trim data-line-numbers="|5,12">
+                  SimpleEntityDto:
+                    type: object
+                    properties:
+                      uuid:
+                        x-mock-type: random.uuid
+                        type: string
+                        description: UUID сущности
+                      name:
+                        type: string
+                        description: Имя сущности
+                      creationDate:
+                        x-mock-type: date.past
+                        type: string
+                        description: Время создания
+                        readOnly: true
+              </code>
+      </pre>
+      <pre data-id="code-animation-2">
+              <code class="hljs stretch" data-trim data-line-numbers="|4,13">
+                  export type SimpleEntityDto = {
+                    /**
+                     * UUID сущности
+                     * @mockType random.uuid
+                     */
+                    uuid?: string;
+                    /**
+                     * Имя сущности
+                     */
+                    name?: string;
+                    /**
+                     * Время создания
+                     * @mockType date.past
+                     */
+                    readonly creationDate?: string;
+                  };
+              </code>
+      </pre>
+    </div>
+  </div>
+
+</section>
+
+<section>
+  <h4>
+    <span style="color: var(--r-link-color)">Исправляем</span> генерацию
+  </h4>
+  <div class="r-vstack r-stretch">
+    <div class="icons-container" style="gap: 10rem">
+      <div class="fragment" style="display: flex; height: 100%">
+        <div class="generated">
+          <div class="icon-cards">
+            <div class="file-icon file-icon-xl" data-type=".ts" style="background: rgb(42, 118, 221)"></div>
+            <div class="file-icon file-icon-xl" data-type=".ts" style="background: rgb(42, 118, 221)"></div>
+            <div class="file-icon file-icon-xl" data-type=".ts" style="background: rgb(42, 118, 221)"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fragment" data-id="arrow-parent" style="display: flex; flex-direction: column; align-items: center">
+        <span>🧙‍♂️</span>
+        <span>+</span>
+        <div class="file-icon file-icon-xl" data-type=".hbs" style="background: var(--r-heading-color)"></div>
+      </div>
+      <div id="arrow-child-9" data-arrow-label="Генераторы" class="fragment" style="display: flex; height: 100%">
+        <div class="generated" style="margin-left: 1rem">
+          <div class="icon-cards">
+            <div class="file-icon file-icon-xl" data-type=".ts" style="background: rgb(42, 118, 221)"></div>
+            <div class="file-icon file-icon-xl" data-type=".ts" style="background: rgb(42, 118, 221)"></div>
+            <div class="file-icon file-icon-xl" data-type=".ts" style="background: rgb(42, 118, 221)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section data-auto-animate>
+  <h4>
+    <span style="color: var(--r-link-color)">Исправляем</span> генерацию
+  </h4>
+  <div class="r-vstack r-stretch">
+      <pre data-id="code-animation">
+        <code class="hljs stretch" data-trim data-line-numbers="|5,7,9,11,13,15|1,16">
+          import type { UserDto } from "./UserDto";
+
+          export type LayerDto = {
+            /**
+             * @mockType random.uuid
+             */
+            readonly uuid: string;
+            /**
+             * @mockType name.firstName
+             */
+            name: string;
+            /**
+             * @mockType date.past
+             */
+            readonly creationDate: string;
+            author: UserDto;
+            readonly root?: boolean;
+          };
+        </code>
+      </pre>
+  </div>
+
+</section>
+<section data-auto-animate>
+  <h4>
+    <span style="color: var(--r-link-color)">Исправляем</span> генерацию
+  </h4>
+  <div class="r-vstack r-stretch items-start">
+      <pre data-id="code-animation">
+        <code class="hljs stretch" data-trim data-line-numbers="|3,13|9-11|21-24">
+          import faker from 'faker';
+
+          import { generator as $generatorUserDto } from './UserDto';
+
+          import type { LayerDto } from '../data/LayerDto';
+
+          // Моковый гененратор для LayerDto
+          const generateOne = (body?: Partial&lt;LayerDto&gt;) => ({
+            uuid: faker.random.uuid(),
+            name: faker.name.firstName(),
+            creationDate: faker.date.past(),
+            root: faker.random.boolean(),
+            author: $generatorUserDto.generateOne(),
+            ...(body ? body : {})
+          } as LayerDto);
+
+          // Моковый гененратор для коллекции LayerDto
+          const generateCollection = (amount: number) =>
+            new Array(amount).fill(null).map(() => generateOne());
+
+          export const generator = {
+            generateOne,
+            generateCollection
+          };
+        </code>
+      </pre>
+  </div>
+</section>

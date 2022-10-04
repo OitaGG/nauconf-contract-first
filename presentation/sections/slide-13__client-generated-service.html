@@ -1,0 +1,82 @@
+<section>
+  <h4>
+    Сгенерированный
+    <span class="primary-highlighted">сервис клиента</span>
+  </h4>
+  <div class="r-vstack r-stretch items-start">
+    <pre data-id="code-animation">
+        <code class="hljs stretch" data-trim data-line-numbers="|1|9-18">
+          export class Service {
+            ...
+            /**
+            * Удалить сущность
+            * @param entityUuid Идентификатор сущности
+            * @returns any Сущность удалена
+            * @throws ApiError
+            */
+            public static async deleteEntity(entityUuid: string): Promise&lt;any&gt; {
+              const result = await __request({
+                method: 'DELETE',
+                path: `/entity/{entityUuid}`,
+                errors: {
+                  404: `Сущность не найдена`,
+                  500: `Ошибка при удалении сущности`,
+                },
+              });
+              return result.body;
+            }
+          ...
+          }
+        </code>
+      </pre>
+  </div>
+  <aside class="notes">
+    Один файлик - Service.ts, в котором описаны функции запросов по всем
+    эндпоинтам, которые есть в спецификации. <br />
+
+    Вот здесь кстати наш request.ts файл и используется.
+  </aside>
+</section>
+<section data-auto-animate>
+  <h4>
+    Используем
+    <span style="color: var(--r-link-color)">сервис</span>
+  </h4>
+  <div class="r-vstack r-stretch items-start">
+    <pre data-id="code-animation">
+      <code class="hljs stretch" data-trim data-line-numbers="|8">
+        /**
+         * Удалить сущность
+         *
+         * @param {string} uuid идентификатор сущности
+         */
+        export const deleteEntityThunk = createAsyncThunk&lt;any, { uuid: string }&gt;(
+          'deleteEntity',
+          ({ uuid }) => Service.deleteEntity(uuid)
+        );
+      </code>
+    </pre>
+  </div>
+</section>
+<section data-auto-animate="">
+  <h4>
+    Используем
+    <span class="primary-highlighted">сервис</span>
+  </h4>
+  <div class="r-vstack r-stretch items-start">
+    <pre data-id="code-animation">
+      <code class="hljs stretch" data-trim data-line-numbers="1,9">
+        import { Service as MockService } from 'mocks'
+        /**
+         * Удалить сущность
+         *
+         * @param {string} uuid идентификатор сущности
+         */
+        export const deleteEntityThunk = createAsyncThunk&lt;any, { uuid: string }&gt;(
+          'deleteEntity',
+          ({ uuid }) => MockService.deleteEntity(uuid)
+        );
+      </code>
+    </pre>
+  </div>
+</section>

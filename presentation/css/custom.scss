@@ -1,0 +1,240 @@
+body:after {
+  content:"";
+
+  position: fixed;
+  bottom: 0.5em;
+  left: 0.5em;
+
+  display: inline-block;
+
+  width: 150px;
+  height: 30px;
+
+  background-image: url(../assets/naumen-brand-icon.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.typical-work__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  width: 100%;
+
+  div:first-child {
+    flex-shrink: 0 !important;
+  }
+
+  img {
+    max-height: 120px !important;
+  }
+}
+
+.typical-work {
+  display: grid;
+  grid-template-columns: 1fr 0.25fr 1fr;
+  align-items: flex-start;
+  grid-column-gap: 20px !important;
+
+  width: 100%;
+
+  .step {
+    width: 0 !important;
+    height: 50px !important;
+    border-radius: 5px !important;
+
+    background: #404040 !important;
+
+    &.complete {
+      background: #3d8361 !important;
+    }
+
+    &.questions {
+      background: var(--r-link-color) !important;
+    }
+
+    &.step_1 {
+      width: 40% !important;
+    }
+
+    &.step_2 {
+      width: 80% !important;
+    }
+
+    &.step_2 {
+      width: 100% !important;
+    }
+  }
+}
+
+
+.file-icon {
+  font-family: Arial, Tahoma, sans-serif;
+  font-weight: 300;
+  display: inline-block;
+  width: 24px;
+  height: 32px;
+  background: #018fef;
+  position: relative;
+  border-radius: 2px;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+
+  border: 1px solid #fff;
+}
+.file-icon::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 0;
+  height: 0;
+  border-bottom-left-radius: 2px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #fff #fff rgba(255,255,255,.35) rgba(255,255,255,.35);
+}
+.file-icon::after {
+  display: block;
+  content: attr(data-type);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 10px;
+  color: #fff;
+  width: 100%;
+  padding: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.file-icon-xl {
+  width: 96px;
+  height: 128px;
+  border-radius: 4px;
+}
+
+.file-icon-xl::before {
+  border-bottom-left-radius: 4px;
+  border-width: 16px;
+}
+.file-icon-xl::after {
+  font-size: 24px;
+  padding: 4px 10px;
+}
+
+
+.icon-cards {
+
+  $elements: 3;
+
+  position: relative;
+
+  @for $i from 0 to $elements {
+    & > *:nth-child(#{$i + 1}) {
+      z-index: calc(#{$elements} - #{$i});
+      margin-bottom: calc(-35px * #{$i});
+    }
+  }
+
+  & > *:not(:first-child) {
+    margin-left: -60px;
+  }
+}
+
+.icons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+
+  height: 100%;
+  width: 100%;
+  min-height: 0;
+}
+
+.inner-section {
+  flex-direction: column;
+
+  display: flex;
+
+  height: 100%;
+}
+
+.primary-highlighted {
+  color: var(--r-link-color);
+}
+
+.default-list {
+  flex-direction: column;
+
+  display: flex !important;
+
+  gap: 1rem;
+
+  position: relative;
+}
+
+.about-imgs-fragment {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.generated {
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+
+  display: flex;
+
+  height: 100%;
+}
+
+.icons-container img.emoji {
+  width: 4rem;
+}
+
+.inner-img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  margin: 0 !important;
+  height: 90% !important;
+}
+
+.modules-container {
+  flex-direction: column;
+  gap: 1rem;
+
+  display: flex;
+
+  width: 100%;
+}
+
+.modules-container > div {
+  position: relative;
+
+  padding: 1.75rem 0;
+
+  width: 50%;
+  margin: auto;
+  border: 2px solid var(--r-heading-color);
+}
+
+.modules-icons {
+  position: absolute;
+  left: -1rem;
+  top: 0;
+
+  scale: 0.5;
+
+  border: none;
+  padding: 0;
+}

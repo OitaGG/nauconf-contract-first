@@ -1,0 +1,89 @@
+<section style="height: 100%">
+  <h4>Генерация <span class="primary-highlighted">клиентской части</span></h4>
+  <div class="r-vstack r-stretch justify-center items-center">
+    <div class="icons-container">
+      <div
+        class="fragment file-icon file-icon-xl"
+        data-type=".yaml"
+        style="background: var(--r-link-color); align-self: center"
+      ></div>
+
+      <div
+        class="fragment"
+        data-id="arrow-parent"
+        style="display: flex; flex-direction: column; gap: 0.5rem; margin: 4rem"
+      >
+        <span>🧙‍♂️</span>
+        <span>+</span>
+        <div
+          class="file-icon file-icon-xl"
+          data-type=".ts"
+          style="background: rgb(42, 118, 221)"
+        ></div>
+      </div>
+
+      <div style="display: flex; height: 100%">
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 100%;
+            margin-right: 2rem;
+          "
+        ></div>
+        <div class="generated">
+          <div
+            id="arrow-child-3"
+            data-arrow-label="Dto's"
+            class="fragment icon-cards"
+          >
+            <div
+              class="file-icon file-icon-xl"
+              data-type=".ts"
+              style="background: rgb(42, 118, 221)"
+            ></div>
+            <div
+              class="file-icon file-icon-xl"
+              data-type=".ts"
+              style="background: rgb(42, 118, 221)"
+            ></div>
+            <div
+              class="file-icon file-icon-xl"
+              data-type=".ts"
+              style="background: rgb(42, 118, 221)"
+            ></div>
+          </div>
+
+          <div
+            id="arrow-child-4"
+            data-arrow-label="Service"
+            class="fragment file-icon file-icon-xl"
+            data-type=".ts"
+            style="background: rgb(42, 118, 221)"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="r-hstack justify-start"
+      style="margin-bottom: 2rem; align-self: flex-start"
+    >
+      <a
+        class="fragment"
+        data-fragment-index="0"
+        href="https://github.com/ferdikoomen/openapi-typescript-codegen"
+        >openapi-typescript-codegen - 🧙‍♂️
+      </a>
+    </div>
+  </div>
+
+  <aside class="notes">
+    Для генерации клиентской части мы использовали nodejs библиотеку, написанную
+    на тайпскрипте - название.
+    <br />
+    Готовое решение, которое по нашему большему yaml файлу помогает с помощью
+    некоторой маги и доработок о которых чуть позже, помогает гененрировать типы
+    - DTO, которые используются при запросах и класс сервиса.
+  </aside>
+</section>

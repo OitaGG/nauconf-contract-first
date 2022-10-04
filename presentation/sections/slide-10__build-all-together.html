@@ -1,0 +1,182 @@
+<section data-auto-animate>
+  <h4>Про <span class="primary-highlighted">структуру</span></h4>
+  <div class="r-vstack r-stretch">
+    <div class="fragment modules-container">
+      <div data-fragment-index="1">framework</div>
+      <div data-fragment-index="1">...</div>
+      <div data-id="web-ui" data-fragment-index="1">web-ui</div>
+      <div data-fragment-index="1">product-smp-5</div>
+      <div data-id="studio" data-fragment-index="1">studio</div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <h4>Про <span class="primary-highlighted">структуру</span></h4>
+  <div class="r-vstack r-stretch">
+    <div class="modules-container">
+      <div data-id="web-ui" data-fragment-index="1">web-ui</div>
+      <div data-id="studio" data-fragment-index="1">studio</div>
+    </div>
+  </div>
+</section>
+
+<section data-auto-animate>
+  <h4>Про <span class="primary-highlighted">структуру</span></h4>
+  <div class="r-vstack r-stretch">
+    <div class="modules-container">
+      <div data-id="web-ui">
+        web-ui
+        <div style="top: -30px" class="modules-icons" data-fragment-index="2">
+          <div class="generated">
+            <div class="icon-cards">
+              <div
+                class="file-icon file-icon-xl"
+                data-type=".yaml"
+                style="background: var(--r-link-color)"
+              ></div>
+              <div
+                class="file-icon file-icon-xl"
+                data-type=".yaml"
+                style="background: var(--r-link-color)"
+              ></div>
+              <div
+                class="file-icon file-icon-xl"
+                data-type=".yaml"
+                style="background: var(--r-link-color)"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-id="studio">
+        studio
+        <div style="top: -30px" class="modules-icons" data-fragment-index="2">
+          <div class="generated">
+            <div class="icon-cards">
+              <div
+                class="file-icon file-icon-xl"
+                data-type=".yaml"
+                style="background: var(--r-link-color)"
+              ></div>
+              <div
+                class="file-icon file-icon-xl"
+                data-type=".yaml"
+                style="background: var(--r-link-color)"
+              ></div>
+              <div
+                class="file-icon file-icon-xl"
+                data-type=".yaml"
+                style="background: var(--r-link-color)"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    Сейчас у нас есть несколько модулей, но нас в целом интересует 2 основных -
+    web ui и studio. Studio - самое наше приложение основное, которое было
+    представлено на скринах, web-ui - модуль, фронтенд из которого в скором
+    времени должен стать микрофронтедом для студии и сам модуль станет модуль
+    станет более независимым, но пока он идет как локальная зависимость.
+    <br />
+
+    Почему нас интересуют эти два модуля - потому что в них как раз лежат
+    определения типов и эндпоинтов в yaml файле.
+  </aside>
+</section>
+
+<section style="height: 100%">
+  <h4>Собираем все <span style="color: var(--r-link-color)">вместе</span></h4>
+  <div class="r-vstack r-stretch justify-center items-center">
+    <div class="icons-container">
+      <div class="fragment" style="display: flex; height: 100%">
+        <div class="generated">
+          <div class="icon-cards">
+            <div
+              class="file-icon file-icon-xl"
+              data-type=".yaml"
+              style="background: var(--r-link-color)"
+            ></div>
+            <div
+              class="file-icon file-icon-xl"
+              data-type=".yaml"
+              style="background: var(--r-link-color)"
+            ></div>
+            <div
+              class="file-icon file-icon-xl"
+              data-type=".yaml"
+              style="background: var(--r-link-color)"
+            ></div>
+          </div>
+
+          <div class="icon-cards">
+            <div
+              class="file-icon file-icon-xl"
+              data-type=".yaml"
+              style="background: var(--r-link-color)"
+            ></div>
+            <div
+              class="file-icon file-icon-xl"
+              data-type=".yaml"
+              style="background: var(--r-link-color)"
+            ></div>
+            <div
+              class="file-icon file-icon-xl"
+              data-type=".yaml"
+              style="background: var(--r-link-color)"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="fragment"
+        style="display: flex; flex-direction: column; gap: 0.5rem; margin: 4rem"
+      >
+        <span>🧙‍♂️</span>
+      </div>
+
+      <div
+        data-id="arrow-parent"
+        class="fragment file-icon file-icon-xl"
+        data-line-child
+        data-type=".yaml"
+        style="background: var(--r-link-color)"
+      ></div>
+
+      <div style="display: flex; height: 100%">
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 100%;
+            margin-right: 2rem;
+          "
+        >
+          <p class="fragment" id="arrow-child-1">
+            <span style="color: var(--r-link-color)">Server</span> Generation
+          </p>
+          <p class="fragment" id="arrow-child-2">
+            <span style="color: var(--r-link-color)">Client</span> Generation
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="r-hstack justify-start"
+      style="margin-bottom: 2rem; align-self: flex-start"
+    >
+      <a
+        class="fragment"
+        data-fragment-index="0"
+        href="https://plugins.gradle.org/plugin/com.rameshkp.openapi-merger-gradle-plugin"
+        >com.rameshkp.openapi-merger-gradle-plugin - 🧙‍♂️</a
+      >
+    </div>
+  </div>
+</section>

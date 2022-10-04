@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/naumen.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/github.css" />
+    <script
+      src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/leader-line-new@1.1.9/leader-line.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.onload = function () {
+        // Parses the document body and
+        // inserts <img> tags in place of Unicode Emojis
+        twemoji.parse(
+          document.body,
+          { folder: "svg", ext: ".svg" } // This is to specify to Twemoji to use SVGs and not PNGs
+        );
+      };
+    </script>
+    <style>
+      pre code {
+        font-size: 1.2rem;
+      }
+
+      img.emoji {
+        margin: 0;
+        width: 2rem;
+
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides" style="inset: initial; transform: none; width: 100%">
+        <!-- Слайд с заголовком темы -->
+        <section
+          data-external-replace="sections/slide-1__initial.html"
+        ></section>
+        <!-- Слайд историей о прошлой работе и боли -->
+        <section
+          data-external-replace="sections/slide-2__last-job.html"
+        ></section>
+        <!-- Слайд о том, как пришел в наумен и преисполнился пониманием :) -->
+        <section
+          data-external-replace="sections/slide-3__hello-naumen.html"
+        ></section>
+        <!-- Слайды про процесс-->
+        <section
+          data-external-replace="sections/slide-4__process.html"
+        ></section>
+        <!-- Слайды почему такой процесс это больно -->
+        <section
+          data-external-replace="sections/slide-5__process-problems.html"
+        ></section>
+        <!-- Слайды про openapi -->
+        <section
+          data-external-replace="sections/slide-6__openapi-main-info.html"
+        ></section>
+        <!-- Слайды с примером спецификации -->
+        <section
+          data-external-replace="sections/slide-7__openapi-example.html"
+        ></section>
+        <!-- ***** SECOND PART ***** -->
+
+        <!-- Слайды с описанием проекта -->
+        <section
+          data-external-replace="sections/slide-8__about-the-project.html"
+        ></section>
+        <!-- Слайды с нашими ожиданиями от contract first -->
+        <section data-external="sections/slide-9__expectations.html"></section>
+        <!-- Слайды про сборку всего вместе -->
+        <section
+          data-external-replace="sections/slide-10__build-all-together.html"
+        ></section>
+        <!-- Слайды генерацию серверной части -->
+        <section
+          data-external-replace="sections/slide-11__server-generation.html"
+        ></section>
+        <!-- Слайды генерацию клиент части -->
+        <section
+          data-external-replace="sections/slide-12__client-generation.html"
+        ></section>
+        <!-- Слайды про сгенерированный сервис клиента -->
+        <section
+          data-external-replace="sections/slide-13__client-generated-service.html"
+        ></section>
+        <!-- Слайды про итоги -->
+        <section
+          data-external-replace="sections/slide-14__what-we-have.html"
+        ></section>
+        <!-- -->
+        <section
+          data-external-replace="sections/slide-15__we-want-more.html"
+        ></section>
+        <section
+          data-external-replace="sections/slide-16__deeper.html"
+        ></section>
+        <section data-external-replace="sections/slide-17__end.html"></section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="js/custom/arrowsHelper.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        width: 1024,
+        height: 768,
+        slideNumber: true,
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealHighlight, RevealNotes],
+        dependencies: [
+          {
+            src: "./plugin/external/external.js",
+            condition: function () {
+              return !!document.querySelector(
+                "[data-external],[data-external-replace]"
+              );
+            },
+          },
+        ],
+      }).then(() => {
+        addArrowsEventListeners();
+      });
+    </script>
+  </body>
+</html>
