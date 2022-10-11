@@ -58,9 +58,38 @@
         const isHidden = window.getComputedStyle(child).visibility === "hidden";
 
         if (!isHidden) {
-          setTimeout(() => createLine(child.id), 400);
+          createLine(child.id);
         }
       });
+    });
+
+    Reveal.addKeyBinding(37, (e) => {
+      const rootElement = Reveal.getRevealElement();
+      // Отключаем transition для перехода назад. В таком случае при прокрутке назад стрелки между компонентами
+      // будут отрисовываться корректно на предыдущих слайдах
+      rootElement.setAttribute("data-transition-speed", "none");
+
+      const routes = Reveal.availableRoutes();
+
+      if (routes.top) {
+        Reveal.top();
+      } else {
+        Reveal.left();
+      }
+    });
+
+    Reveal.addKeyBinding(39, (e) => {
+      const rootElement = Reveal.getRevealElement();
+      // Включаем transition для перехода вперед
+      rootElement.setAttribute("data-transition-speed", "fast");
+
+      const routes = Reveal.availableRoutes();
+
+      if (routes.bottom) {
+        Reveal.bottom();
+      } else {
+        Reveal.right();
+      }
     });
   };
 

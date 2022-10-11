@@ -668,6 +668,9 @@ $controlsArrowAngleActive: 36deg;
 }
 
 /* Global transition speed settings */
+.reveal[data-transition-speed="none"] .slides section {
+	transition-duration: 0ms;
+}
 .reveal[data-transition-speed="fast"] .slides section {
 	transition-duration: 400ms;
 }
