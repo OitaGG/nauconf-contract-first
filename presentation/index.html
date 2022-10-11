@@ -9,7 +9,6 @@
 
     <title>reveal.js</title>
 
-    <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
     <link rel="stylesheet" href="dist/theme/naumen.css" />
 
@@ -20,6 +19,7 @@
       crossorigin="anonymous"
     ></script>
     <script
+      type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/leader-line-new@1.1.9/leader-line.min.js"
       crossorigin="anonymous"
     ></script>
@@ -121,15 +121,16 @@
     <script src="js/custom/arrowsHelper.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
     <script>
-      // More info about initialization & config:
-      // - https://revealjs.com/initialization/
-      // - https://revealjs.com/config/
       Reveal.initialize({
         hash: true,
         width: 1024,
         height: 768,
+        margin: 0.1,
+        maxScale: 4.0,
         slideNumber: true,
-        // Learn about plugins: https://revealjs.com/plugins/
+        transitionSpeed: "fast",
+
+        // plugins
         plugins: [RevealHighlight, RevealNotes],
         dependencies: [
           {
@@ -141,9 +142,7 @@
             },
           },
         ],
-      }).then(() => {
-        addArrowsEventListeners();
-      });
+      }).then((e) => addArrowsEventListeners(e.currentSlide));
     </script>
   </body>
 </html>

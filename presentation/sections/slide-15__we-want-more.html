@@ -21,7 +21,7 @@
   </h4>
   <div class="r-vstack r-stretch">
     <pre class="fragment" data-id="code-animation">
-        <code class="hljs stretch" data-trim data-line-numbers="|5,21|10|11-19|13-17">
+        <code class="hljs stretch" data-trim data-line-numbers="|5,21|10|11-17|13-14">
             /**
              * Обёртка для расширения мокового класса Service
              */
@@ -34,11 +34,8 @@
                 public static getEntitiesNames(parentUuid: string): Promise&lt;string[]&gt; {
                   return new Promise((resolve) => {
                     setTimeout(() => {
-                      resolve(
-                        get50To50Chance()
-                          ? []
-                          : [ entities[2].name, entities[4].name ]
-                      );
+                      const filledMock = [entities[2].name, entities[4].name]
+                      resolve(get50To50Chance() ? [] : filledMock);
                     }, TIMEOUT);
                   });
                 }

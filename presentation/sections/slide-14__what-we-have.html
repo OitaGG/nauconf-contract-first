@@ -1,7 +1,7 @@
 <section>
   <h4>С чем <span style="color: var(--r-link-color)">столкнулись</span></h4>
   <div class="r-vstack r-stretch justify-start">
-    <ul class="default-list">
+    <ul class="default-list" style="height: 100%">
       <li class="fragment" data-fragment-index="0">
         Сборка единого yaml-файла из модулей
       </li>
@@ -11,17 +11,22 @@
       <li class="fragment" data-fragment-index="2">
         Отсутствие поддержки blob-объектов
       </li>
-      <div style="position: relative">
+      <div style="position: relative; flex: 1">
         <div
           class="fragment fade-in-then-out"
           data-fragment-index="3"
-          style="position: absolute; top: 0"
+          style="position: absolute; top: 0; height: 90%"
         >
           <img src="assets/opensource.png" />
         </div>
-        <li class="fragment" data-fragment-index="4">
-          Некоторые особенности OpenApi V3 не работали для генератора сервера
-        </li>
+        <div class="default-list">
+          <li class="fragment" data-fragment-index="4">
+            Некоторые особенности OpenApi V3 не работали для генератора сервера
+          </li>
+          <li class="fragment" data-fragment-index="5">
+            Разные DTO для разных ошибок в ответах
+          </li>
+        </div>
       </div>
     </ul>
   </div>

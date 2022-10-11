@@ -1,27 +1,38 @@
 (function () {
-  let lines = [];
+  const linesMap = {};
   let currentSection = null;
 
   const createLine = (id) => {
+    if (linesMap[id]) {
+      return linesMap[id].show("none");
+    }
+
     const parent = currentSection?.querySelector('[data-id="arrow-parent"]');
     const childElement = document.getElementById(id);
-
     const arrowLabel = childElement?.dataset?.arrowLabel;
 
-    const line = new LeaderLine(parent, document.getElementById(id));
-
-    line.setOptions({
+    linesMap[id] = new LeaderLine(parent, document.getElementById(id), {
       startSocketGravity: 120,
       endLabel: LeaderLine.captionLabel(arrowLabel, {
         fontSize: "1.75rem",
         color: "#404040",
       }),
     });
-
-    lines.push([id, line]);
   };
 
-  const addArrowsEventListeners = () => {
+  const addArrowsEventListeners = (initialSlide) => {
+    currentSection = initialSlide;
+
+    const children = currentSection?.querySelectorAll("[id^=arrow-child]");
+
+    children?.forEach((child) => {
+      const isHidden = window.getComputedStyle(child).visibility === "hidden";
+
+      if (!isHidden) {
+        createLine(child.id);
+      }
+    });
+
     Reveal.on("fragmentshown", (e) => {
       if (e.fragment.id?.startsWith("arrow-child")) {
         createLine(e.fragment.id);
@@ -29,29 +40,25 @@
     });
 
     Reveal.on("fragmenthidden", (e) => {
-      const lineIdx = lines.findIndex((line) => line[0] === e.fragment.id);
+      const fragmentId = e.fragment.id;
 
-      if (lineIdx !== -1) {
-        lines[lineIdx][1]?.remove();
-
-        lines.splice(lineIdx, 1);
+      if (e.fragment.id?.startsWith("arrow-child")) {
+        linesMap[fragmentId]?.hide("none");
       }
     });
 
     Reveal.on("slidechanged", (e) => {
-      lines.forEach((line) => line[1]?.remove());
-
-      lines = [];
+      Object.values(linesMap).forEach((line) => line.hide("none"));
 
       currentSection = e.currentSlide;
 
-      const children = currentSection.querySelectorAll("[id^=arrow-child]");
+      const children = currentSection?.querySelectorAll("[id^=arrow-child]");
 
-      children.forEach((child) => {
+      children?.forEach((child) => {
         const isHidden = window.getComputedStyle(child).visibility === "hidden";
 
         if (!isHidden) {
-          createLine(child.id);
+          setTimeout(() => createLine(child.id), 400);
         }
       });
     });

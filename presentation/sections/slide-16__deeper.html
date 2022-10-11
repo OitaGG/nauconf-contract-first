@@ -116,6 +116,20 @@
 </section>
 
 <section>
+  <h4>Каков <span style="color: var(--r-link-color)">план</span></h4>
+  <ul class="default-list">
+    <li class="fragment">Добавить аннотации при генерации typescript типов и интерфейсов</li>
+    <li class="fragment">
+      Исправить реализацию intermock:
+      <ul class="default-list fragment" style="margin-top: 1rem">
+        <li>Получать функции-генераторы, а не готовые данные</li>
+        <li>Генерация по hbs-шаблону в файлы</li>
+        <li>Добавить возможность использования импортов и пересечения типов</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+<section>
   <h4>
     Добавляем <span style="color: var(--r-link-color)">кастомные свойства</span>
   </h4>
@@ -170,7 +184,7 @@
     <span style="color: var(--r-link-color)">Исправляем</span> генерацию
   </h4>
   <div class="r-vstack r-stretch">
-    <div class="icons-container" style="gap: 10rem">
+    <div class="icons-container" style="gap: 12rem">
       <div class="fragment" style="display: flex; height: 100%">
         <div class="generated">
           <div class="icon-cards">
@@ -205,7 +219,7 @@
   </h4>
   <div class="r-vstack r-stretch">
       <pre data-id="code-animation">
-        <code class="hljs stretch" data-trim data-line-numbers="|5,7,9,11,13,15|1,16">
+        <code class="hljs stretch" data-trim data-line-numbers="|5,7,9,11,13,15|1,16|17">
           import type { UserDto } from "./UserDto";
 
           export type LayerDto = {
@@ -235,7 +249,7 @@
   </h4>
   <div class="r-vstack r-stretch items-start">
       <pre data-id="code-animation">
-        <code class="hljs stretch" data-trim data-line-numbers="|3,13|9-11|21-24">
+        <code class="hljs stretch" data-trim data-line-numbers="|8-19|8-15|3,13|9-11|12|21-24">
           import faker from 'faker';
 
           import { generator as $generatorUserDto } from './UserDto';
